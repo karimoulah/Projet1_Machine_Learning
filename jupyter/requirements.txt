@@ -1,0 +1,9 @@
+jupyterlab
+pandas
+scikit-learn
+matplotlib
+seaborn
+pymongo
+dnspython
+notebook
+ipykernel
