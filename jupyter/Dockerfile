@@ -1,24 +1,18 @@
-FROM python:3.11-slim
+# Utiliser l'image Jupyter scientifique avec plein de libs déjà incluses
+FROM jupyter/scipy-notebook:latest
 
-# Installation des dépendances système utiles
-RUN apt-get update && apt-get install -y build-essential git curl && rm -rf /var/lib/apt/lists/*
+# Définir le répertoire de travail
+WORKDIR /home/jovyan/work
 
-# Créer un utilisateur non-root pour Jupyter (bonne pratique)
-ENV USER=jovyan
-ENV HOME=/home/$USER
-RUN useradd -m -s /bin/bash $USER
+# Installer les dépendances supplémentaires nécessaires à ton projet
+RUN pip install --no-cache-dir \
+    pymongo \
+    scikit-learn \
+    pandas \
+    matplotlib \
+    seaborn \
+    xgboost \
+    eli5
 
-WORKDIR $HOME
-
-# Copier requirements (notebook libs)
-COPY requirements.txt $HOME/requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copier notebooks
-COPY notebooks/ $HOME/work/
-
-RUN chown -R $USER:$USER $HOME
-USER $USER
-
-# Lancer JupyterLab
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--NotebookApp.token=''", "--NotebookApp.allow_origin='*'"]
+# Exposer le port Jupyter
+EXPOSE 8888
