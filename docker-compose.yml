@@ -35,7 +35,7 @@ services:
     image: mongo:6.0
     command: >
       bash -c "sleep 5 &&
-               mongoimport --host mongo --db german_credit --collection records --type csv --headerline --file /data/import/german_credit.csv --drop"
+               mongoimport  --host mongo --db german_credit_data --collection records --type csv --headerline --file /data/import/german_credit_data.csv --drop"
     volumes:
       - ./data:/data/import:ro
     depends_on:
