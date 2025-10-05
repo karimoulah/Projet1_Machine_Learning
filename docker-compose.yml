@@ -37,7 +37,7 @@ services:
     volumes:
       - ./scripts:/app
       - ./data:/data/import:ro
-    command: python load_data.py
+    command: bash -c "pip install pandas pymongo && python load_data.py"
     depends_on:
       - mongo
     restart: "no"
