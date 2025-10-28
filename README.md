@@ -35,6 +35,8 @@ mgl7811_project/
 **Services (docker-compose.yml)**
 
 - `mongo` : **MongoDB 6.0** (stockage NoSQL, persistance via volume `mongo_data`)
+
+  MongoDB a été choisi pour sa simplicité de déploiement en conteneur et sa compatibilité native avec les structures de données semi-structurées comme celles utilisées dans le projet German Credit.
 - `mongo-express` : UI web d’administration MongoDB (port `8081`)
 - `jupyter` : Environnement **Jupyter Lab** (port `8888`) avec dépendances data science + `pymongo`
 - `data-loader` : Conteneur éphémère qui **importe** `./data/german_credit_data.csv` → MongoDB (`db=german_credit_data`, `collection=records`)
@@ -83,6 +85,8 @@ git clone https://github.com/karimoulah/Projet1_Machine_Learning.git
 
 ```bash
 docker compose up -d --build
+
+docker logs projet1_machine_learning_jupyter_1 (Affiche l’URL avec le token) Pour se connecter au jupyter lab
 ```
 
 4) **Accéder aux interfaces** :
